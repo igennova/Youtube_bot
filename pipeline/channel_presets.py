@@ -19,6 +19,8 @@ class ChannelPreset(TypedDict):
     label: str
     groq_system_hint: str
     segment_count: int  # images + script beats
+    image_style_suffix: str
+    image_negative_prompt: str
 
 
 PRESETS: dict[str, ChannelPreset] = {
@@ -31,6 +33,13 @@ PRESETS: dict[str, ChannelPreset] = {
             "if unsure, pick safer wording. No hashtags inside narration."
         ),
         "segment_count": 5,
+        "image_style_suffix": (
+            ", clean modern digital illustration, bright educational style, "
+            "crisp details, balanced colors, youtube explainer art, no text, no watermark"
+        ),
+        "image_negative_prompt": (
+            "horror, creepy, ghost, dark gore, blurry, low quality, watermark, logo, text"
+        ),
     },
     "school_story": {
         "id": "school_story",
@@ -41,6 +50,13 @@ PRESETS: dict[str, ChannelPreset] = {
             "Build to one memorable twist. Keep each kid-safe."
         ),
         "segment_count": 5,
+        "image_style_suffix": (
+            ", cinematic storybook illustration, school-life scene art, emotional lighting, "
+            "detailed characters, youtube short illustration, no text, no watermark"
+        ),
+        "image_negative_prompt": (
+            "horror, gore, blood, photorealistic, blurry, low quality, watermark, logo, text"
+        ),
     },
     "psych_tradeoff": {
         "id": "psych_tradeoff",
@@ -51,6 +67,13 @@ PRESETS: dict[str, ChannelPreset] = {
             "Practical tips only."
         ),
         "segment_count": 5,
+        "image_style_suffix": (
+            ", minimalist editorial illustration, calm modern design, clean composition, "
+            "soft gradient colors, thoughtful mood, no text, no watermark"
+        ),
+        "image_negative_prompt": (
+            "horror, creepy, dark gore, cluttered, low quality, watermark, logo, text"
+        ),
     },
     "history_micro": {
         "id": "history_micro",
@@ -60,6 +83,13 @@ PRESETS: dict[str, ChannelPreset] = {
             "No graphic violence. End with why it matters in one line."
         ),
         "segment_count": 5,
+        "image_style_suffix": (
+            ", historical painting style illustration, cinematic period art, rich textures, "
+            "dramatic but respectful lighting, no text, no watermark"
+        ),
+        "image_negative_prompt": (
+            "modern gadgets, neon cyberpunk, gore, low quality, watermark, logo, text"
+        ),
     },
     "ghost_stories": {
         "id": "ghost_stories",
@@ -74,6 +104,38 @@ PRESETS: dict[str, ChannelPreset] = {
             "All stories fictional. Original characters. PG-13. No hashtags in narration."
         ),
         "segment_count": 6,
+        "image_style_suffix": (
+            ", dark spooky cartoon illustration, eerie atmosphere, creepy stylized art, "
+            "bold outlines, muted haunting colors, horror cartoon aesthetic, ghostly shadows, "
+            "dramatic lighting, sinister mood, professional youtube thumbnail quality, "
+            "no text, no captions, no watermark, no logos"
+        ),
+        "image_negative_prompt": (
+            "photorealistic, photograph, happy cheerful bright, anime eyes, blurry, "
+            "low quality, watermark, logo, text, title, signature, ugly, grainy, "
+            "gore, blood, nudity, child-unsafe"
+        ),
+    },
+    "fantasy_arc": {
+        "id": "fantasy_arc",
+        "label": "Original fantasy anime-inspired episodic arc",
+        "groq_system_hint": (
+            "You write episodic fantasy Shorts with anime-inspired pacing, but fully original IP. "
+            "No copyrighted names, no existing franchises, no character copies. "
+            "Episode format: fast hook, rising conflict, cliffhanger ending. "
+            "Keep continuity between episodes when creator provides context. "
+            "Tone: adventurous, mysterious, emotional. PG-13. No hashtags in narration."
+        ),
+        "segment_count": 6,
+        "image_style_suffix": (
+            ", anime-inspired fantasy illustration, dynamic action composition, cinematic lighting, "
+            "vivid magical colors, detailed character design, dramatic atmosphere, "
+            "high quality digital art, no text, no watermark, no logos"
+        ),
+        "image_negative_prompt": (
+            "copyrighted characters, real franchise logos, photorealistic, blurry, "
+            "low quality, watermark, signature, text"
+        ),
     },
 }
 

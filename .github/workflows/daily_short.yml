@@ -21,12 +21,17 @@ env:
   YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
   YT_CLIENT_SECRET_VALUE: ${{ secrets.YT_CLIENT_SECRET_VALUE }}
   YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+  IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+  IG_ACCOUNT_ID: ${{ secrets.IG_ACCOUNT_ID }}
   EDGE_TTS_VOICE: "en-US-ChristopherNeural"
+
+permissions:
+  contents: write
 
 jobs:
   generate-and-upload:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -52,14 +57,20 @@ jobs:
           key: story-history-${{ github.event.inputs.channel || 'ghost_stories' }}
 
       - name: Generate & upload Short
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           CHANNEL="${{ github.event.inputs.channel || 'ghost_stories' }}"
           TOPIC="${{ github.event.inputs.topic || '' }}"
+          IG_FLAG=""
+          if [ -n "$IG_ACCESS_TOKEN" ] && [ -n "$IG_ACCOUNT_ID" ]; then
+            IG_FLAG="--instagram"
+          fi
 
           if [ -n "$TOPIC" ]; then
-            python scripts/run_short.py --channel "$CHANNEL" --topic "$TOPIC" --upload --privacy public
+            python scripts/run_short.py --channel "$CHANNEL" --topic "$TOPIC" --upload --privacy public $IG_FLAG
           else
-            python scripts/run_short.py --channel "$CHANNEL" --upload --privacy public
+            python scripts/run_short.py --channel "$CHANNEL" --upload --privacy public $IG_FLAG
           fi
 
       # Save history so next run knows what stories already exist
