@@ -49,7 +49,7 @@ PRESETS: dict[str, ChannelPreset] = {
                 "caption_font": "NotoSansDevanagari-Bold.ttf",
                 "caption_font_name": "Noto Sans Devanagari",
                 "yt_token_env": "YT_REFRESH_TOKEN_HI",
-                "min_words": 50,
+                "min_words": 85,
             },
             {
                 "lang": "en",
@@ -75,7 +75,9 @@ PRESETS: dict[str, ChannelPreset] = {
             "'close-up macro photo of a honeybee on a yellow flower', "
             "'wide shot of Saturn V rocket launching at night with flames'. "
             "BILINGUAL RULE: the SAME story/facts must be expressed naturally in each language — "
-            "do not literally translate word-for-word; rephrase so each version sounds native and flows well."
+            "do not literally translate word-for-word; rephrase so each version sounds native and flows well. "
+            "HINDI LENGTH: variants.hi.full_narration MUST be noticeably longer than a teaser — "
+            "aim for 105-135 Devanagari words with rich detail and connective phrases so the voiceover fills ~40-50 seconds."
         ),
         "segment_count": 5,
         "image_style_suffix": (

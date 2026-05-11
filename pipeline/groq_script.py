@@ -21,7 +21,11 @@ GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
 # ── Language-specific word-count guidance ──────────────────────────────
 LANG_WORD_TARGETS = {
     "en": (120, 150, "120-150 English words (35-45 sec spoken)"),
-    "hi": (85, 105, "85-105 Devanagari Hindi words (35-40 sec spoken — Hindi reads slower)"),
+    "hi": (
+        105,
+        135,
+        "105-135 Devanagari Hindi words (~40-50 sec spoken; use full sentences, not headlines)",
+    ),
 }
 
 
@@ -116,7 +120,7 @@ STRICT RULES:
             raise ValueError(f"image_prompt {i} is empty")
 
     word_count = len(narration.split())
-    min_words = 50 if language == "hi" else 80
+    min_words = 85 if language == "hi" else 80
     if word_count < min_words:
         raise ValueError(
             f"Narration too short ({word_count} words, expected ≥ {min_words} for {language})"
@@ -198,7 +202,7 @@ STRICT RULES:
         if not narration:
             raise ValueError(f"variants['{lang}'].full_narration empty")
 
-        min_words = v.get("min_words", 50 if lang == "hi" else 80)
+        min_words = v.get("min_words", 85 if lang == "hi" else 80)
         word_count = len(narration.split())
         if word_count < min_words:
             raise ValueError(
